@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="fc2d8873-8352-44e9-9654-be4ab12e0c88" name="Changes" comment="Added core project files.">
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2023-06-01,_2_33_p_m__[Changes]/shelved.patch" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Merge.Settings">
+    <option name="BRANCH" value="origin/master" />
+  </component>
+  <component name="Git.Settings">
+    <excluded-from-favorite>
+      <branch-storage>
+        <map>
+          <entry type="REMOTE">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$/note-keeper" source="origin/master" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </excluded-from-favorite>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="SYNC" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="0a3f1005-481b-4d60-b93c-2859746912bc" />
+        <option name="url" value="https://github.com/OliverC96/WebDev-Projects.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/note-keeper/.gitignore" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/note-keeper/package.json" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
+  </component>
+  <component name="ProjectId" id="2QR58LpSQoyNzSbMjKBMTa5VIAv" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/Users/oliverclennan/WebstormProjects/WebDev-Projects",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "ChangesTree.GroupingKeys": [
+      "directory"
+    ]
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/note-keeper/src" />
+      <recent name="$PROJECT_DIR$/Keeper" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="fc2d8873-8352-44e9-9654-be4ab12e0c88" name="Changes" comment="" />
+      <created>1685303392554</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1685303392554</updated>
+      <workItem from="1685303394265" duration="19125000" />
+      <workItem from="1685650348509" duration="554000" />
+    </task>
+    <task id="LOCAL-00001" summary="Added core project files.">
+      <created>1685578958249</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1685578958249</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Added core project files.">
+      <created>1685579345660</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1685579345660</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Added core project files.">
+      <created>1685580206411</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1685580206411</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Added core project files.">
+      <created>1685580308549</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1685580308549</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Added core project files.">
+      <created>1685650120583</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1685650120583</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Added core project files.">
+      <created>1685650488510</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1685650488510</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Added core project files.">
+      <created>1685650597081</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1685650597081</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Added core project files.">
+      <created>1685650787380</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1685650787380</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+    <option name="exactExcludedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/Wiki-API/node_modules/sift/src/utils.js" />
+        <option value="$PROJECT_DIR$/Wiki-API/node_modules/sift/src/utils.js.map" />
+        <option value="$PROJECT_DIR$/Wiki-API/node_modules/sift/src/utils.d.ts" />
+        <option value="$PROJECT_DIR$/Secrets/node_modules/sift/src/utils.js" />
+        <option value="$PROJECT_DIR$/Secrets/node_modules/sift/src/utils.js.map" />
+        <option value="$PROJECT_DIR$/Secrets/node_modules/sift/src/utils.d.ts" />
+        <option value="$PROJECT_DIR$/Secrets/node_modules/sift/src/operations.js" />
+        <option value="$PROJECT_DIR$/Secrets/node_modules/sift/src/operations.js.map" />
+        <option value="$PROJECT_DIR$/Secrets/node_modules/sift/src/operations.d.ts" />
+        <option value="$PROJECT_DIR$/Secrets/node_modules/sift/src/index.js" />
+        <option value="$PROJECT_DIR$/Secrets/node_modules/sift/src/index.js.map" />
+        <option value="$PROJECT_DIR$/Secrets/node_modules/sift/src/index.d.ts" />
+        <option value="$PROJECT_DIR$/Secrets/node_modules/sift/src/core.js" />
+        <option value="$PROJECT_DIR$/Secrets/node_modules/sift/src/core.js.map" />
+        <option value="$PROJECT_DIR$/Secrets/node_modules/sift/src/core.d.ts" />
+        <option value="$PROJECT_DIR$/Wiki-API/node_modules/sift/src/operations.js" />
+        <option value="$PROJECT_DIR$/Wiki-API/node_modules/sift/src/operations.js.map" />
+        <option value="$PROJECT_DIR$/Wiki-API/node_modules/sift/src/operations.d.ts" />
+        <option value="$PROJECT_DIR$/Wiki-API/node_modules/sift/src/index.js" />
+        <option value="$PROJECT_DIR$/Wiki-API/node_modules/sift/src/index.js.map" />
+        <option value="$PROJECT_DIR$/Wiki-API/node_modules/sift/src/index.d.ts" />
+        <option value="$PROJECT_DIR$/Wiki-API/node_modules/sift/src/core.js" />
+        <option value="$PROJECT_DIR$/Wiki-API/node_modules/sift/src/core.js.map" />
+        <option value="$PROJECT_DIR$/Wiki-API/node_modules/sift/src/core.d.ts" />
+      </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/note-keeper" />
+    </ignored-roots>
+    <MESSAGE value="Added core project files." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added core project files." />
+  </component>
+</project>
