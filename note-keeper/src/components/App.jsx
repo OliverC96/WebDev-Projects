@@ -1,49 +1,27 @@
-// Importing core functional components (i.e. react hooks)
-import React, { useState } from "react";
-import { Header } from "./Header";
-import { Footer } from "./Footer";
-import { Note } from "./Note";
-import { CreateArea } from "./CreateArea";
+// Importing core functional components for each express route
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Home } from "./Home/Home";
+import { Login } from "./Login/Login";
+import { Register } from "./Register/Register";
+import { Header } from "./Partials/Header.jsx";
+import { Footer } from "./Partials/Footer.jsx";
 
 // Constructing, and extracting the highest-level component/module
 export function App() {
 
-    // Utilizing a useState hook to keep track of the note collection
-    const [notes, setNotes] = useState([]);
-
-    // Adding a new note to the collection
-    function createNote(newNote) {
-        setNotes((prevNotes) => {
-            return [...prevNotes, newNote]; // Appending the note to the collection
-        })
-    }
-
-    // Removing the specified note from the collection
-    function deleteNote(noteId) {
-        setNotes((prevNotes) => {
-            return prevNotes.filter((note, index) => {
-                return index !== noteId; // Filtering out the note which matches the given id
-            })
-        })
-    }
-
     return (
         <div>
-            <Header />
-            <CreateArea
-                onAdd={createNote}
-            />
-            {/* Rendering a note component for each note in the collection */}
-            {notes.map((note, index) => (
-                <Note
-                    key={index}
-                    id={index}
-                    title={note.title}
-                    content={note.content}
-                    onDel={deleteNote}
-                />
-            ))}
-            <Footer />
+            <BrowserRouter>
+                <Header />
+                <Routes>
+                    <Route exact path="/" element={<Login />} />
+                    <Route exact path="/register" element={<Register />} />
+                    <Route exact path="/home" element={<Home />} />
+                </Routes>
+                <Footer />
+            </BrowserRouter>
         </div>
     );
+
 }

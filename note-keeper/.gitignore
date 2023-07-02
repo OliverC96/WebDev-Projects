@@ -24,4 +24,5 @@ yarn-error.log*
 
 .eslintcache
 /node_modules/
-.env
+backend/.env
+src/.env

@@ -1,0 +1,6 @@
+Remaining features in development:
+-> Implement dark mode (alternate visual theme)
+-> Implement authentication (local and 3rd party) via passport.js
+    * Currently facing significant issues with axios/react/node navigation
+-> Display personalized welcome message/greeting in navbar when user is logged in
+-> Display logout link in navbar when user is logged in

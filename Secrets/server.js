@@ -1,11 +1,11 @@
 /******************************************************************************************
 Project: Exploring Encryption and Authentication Methods
 Author: Oliver Clennan
--> Allows authenticated users to view the secret phrase
+-> Allows authenticated users.js to view the secret phrase
 -> Experimenting with various encryption methods in node.js, including:
     -> Mongoose database encryption, SHA-512, bcrypt (hashing and salting), and passport.js
 -> Implementing Google and Facebook sign-in and registration functionality via OAuth 2.0
--> Keeping track of users and user sessions via Mongoose and express-session
+-> Keeping track of users.js and user sessions via Mongoose and express-session
 ******************************************************************************************/
 
 // Importing critical modules
@@ -14,7 +14,6 @@ const ejs = require("ejs");
 const bodyParser = require("body-parser");
 const passport = require("./middleware/passport");
 const session = require("express-session");
-const User = require("./models/users");
 const routes = require("./routes");
 require("dotenv/config");
 

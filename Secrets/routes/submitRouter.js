@@ -14,7 +14,7 @@ router.route("/submit")
         else res.redirect("/login");
     })
 
-    // Saving the entered secret to the user's document (i.e. profile) in the users database
+    // Saving the entered secret to the user's document (i.e. profile) in the users.js database
     .post((req, res) => {
         User.updateOne({_id: req.session.passport.user.id}, {$set: {secret: req.body.secret}})
             .then(() => res.redirect("/secrets"))

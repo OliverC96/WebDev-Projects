@@ -6,8 +6,7 @@ export function Footer() {
 
     const currDate = new Date();
     const currYear = currDate.getFullYear();
-    const authorName = process.env.REACT_APP_AUTHOR_NAME;
 
-    return <footer><p> Copyright <MdCopyright/> {authorName} {currYear} </p></footer>;
+    return <footer><p> Copyright <MdCopyright/> {currYear} </p></footer>;
 
 }

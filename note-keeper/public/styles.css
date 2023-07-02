@@ -10,9 +10,8 @@
 html {
     font-family: "Montserrat", sans-serif;
 }
+
 body {
-    background: #eee;
-    background-image: url("https://www.transparenttextures.com/patterns/cubes.png");
     padding: 0 16px;
 }
 
@@ -63,14 +62,15 @@ footer p {
 .note button {
     position: relative;
     float: right;
-    margin-right: 10px;
     color: var(--green);
     border: none;
-    width: 36px;
-    height: 36px;
     cursor: pointer;
     outline: none;
     background-color: transparent;
+}
+
+.note button:hover {
+    opacity: 0.7;
 }
 
 form.create-note {
@@ -106,3 +106,12 @@ form.create-note button {
     cursor: pointer;
     outline: none;
 }
+
+.divider:after,
+.divider:before {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #eee;
+}
+

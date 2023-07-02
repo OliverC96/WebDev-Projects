@@ -36,7 +36,7 @@ export function CreateArea(props) {
             title: "",
             content: ""
         });
-        event.preventDefault(); // Preventing the default refresh behaviour upon form submission
+        window.location.reload();
     }
 
     return (
@@ -49,6 +49,7 @@ export function CreateArea(props) {
                         name="title"
                         placeholder="Title"
                         value={note.title}
+                        required
                     />)
                 }
                 {/* Triple the number of rows in the text area in the expanded form */}
@@ -59,6 +60,7 @@ export function CreateArea(props) {
                     placeholder="Take a note..."
                     rows={isExpanded ? 3 : 1}
                     value={note.content}
+                    required
                 />
                 {/* Implementing a floating action button with a smooth zoom effect */}
                 <Zoom in={isExpanded}>
