@@ -1,0 +1,93 @@
+Evolution of the Web:
+-> Web 1.0 (primitive, primarily read-only sites with dedicated/rigid infrastructure)
+-> Web 2.0 (the rise of social media, increasingly interactive sites, users as the product)
+-> Web 3.0 (the next generation of the web: decentralized, open-source, built on top of blockchain technologies)
+
+Introduction to blockchain technology:
+-> SHA-256: secure one-way cryptographic (hash) function to encrypt data (impossible to decrypt from hash to original data)
+-> Every block on a blockchain can be uniquely identified by a hash (fingerprint of the block's data)
+-> A block's hash value must match pre-determined condition(s) before being added to the blockchain
+    -> Computer's can use brute-force to find a valid 'nonce' value that satisfies such condition(s)
+        -> This process is generally referred to as 'mining' (very energy-intensive)
+    -> Essentially, mining describes the solving of complex cryptographic problems to verify/process blockchain transactions
+-> In a blockchain (i.e. a singly-linked-list of blocks), a block's hash value is determined by both its data, and the previous block's hash
+    -> The first/initial block in a blockchain is commonly referred to as the 'genesis block', as no other blocks precede it
+-> It is impossible to alter data stored in a ledger/blockchain
+    -> Any attempt to modify data in a block will invalidate that block, as well as every subsequent block (as hash values are inter-related)
+-> A ledger is a digital collection of cryptographic transactions (a recording/log of all previous activities on a blockchain)
+-> Blockchains are: immutable, distributed, decentralized, transparent, secure, and unanimous
+-> Every participant in the blockchain has access to an up-to-date, exhaustive copy of the chain's ledger to further enforce data integrity
+    -> Participants (peers) who attempt to modify, or otherwise corrupt data on the chain are known as 'bad players'
+    -> A consensus is the procedure during which all peers/players involved in a blockchain network reach a common agreement about the present state of the network
+    -> New blocks cannot be added to the blockchain unless a consensus is successfully reached
+        -> Such a consensus will not occur in the presence of bad player(s)
+-> Blockchain ledgers are heavily distributed, and trust-less (trust in the underlying technology as opposed to other peers)
+
+Smart Contracts, DApps, and DAOs:
+-> Smart contracts are code stored within a blockchain that automatically executes the terms and agreements of a contract, removing the need for parties to trust each other
+-> Decentralized applications (DApps) are the next iteration of the internet (the technological backbone of Web 3.0)
+-> Decentralized autonomous organizations (DAOs) replace the role of a traditional board of directors
+    -> Allow some users to hold special tokens which provide exclusive governance privileges
+        -> These users guide the direction of the crypto's future
+
+Introduction to the ICP Blockchain:
+-> The goal of Internet Computer (ICP) is to achieve blockchain singularity
+    -> More specifically, the event in which blockchain(s) are capable of running the entire base layer of the web
+-> The ICP protocol aggregates the computational power of all of its individual computers (i.e. nodes) into a single, decentralized 'master' computer
+    -> This master computer is organized and subdivided into multiple 'canister' components
+        -> These canisters are able to execute code and store program data
+        -> Users can freely access and interact with canisters via simple HTTPS requests
+        -> Program states are saved and preserved within each canister
+
+Introduction to Motoko and the Candid IDL:
+-> A robust programming language specifically designed to support the unique features of the ICP blockchain
+-> 'Actors' represent and encapsulate canister smart contracts
+    -> Autonomous objects which only communicate with others through asynchronous messages
+-> Asynchronous messages are function calls which return a 'future'
+    -> The 'await' keyword is used to suspend execution until a future has completed
+-> Candid is an interface description language which aims to describe and dictate the public interface of a service
+    -> For our purposes, a 'service' refers to a canister smart contract on the ICP
+    -> Candid is language-agnostic, and enables efficient communication between frontends written in different programming languages
+-> Motoko is a strongly-typed language, meaning all data types must be explicitly specified by the programmer
+-> Update calls:
+    -> Allow the user to modify the state of the canister (make persistent changes)
+    -> Are answered in an asynchronous fashion (waiting for 'futures'/promises to complete execution before continuing)
+    -> Are computationally expensive (and thus relatively slow to execute), as they must pass through consensus before achieving results
+-> Query calls:
+    -> Allow the user to query the current state of the canister, or operate on the canister without changing it
+    -> Are answered immediately, in a synchronous fashion (no delay/waiting necessary)
+    -> Are computationally cheap in comparison (quick, read-only operations that do not have to pass through consensus)
+    -> Note: the 'query' keyword must be specified before the 'func' keyword in function definitions
+-> There is an inherent trade-off (inverse relationship) that exists between performance and security:
+    -> Update calls may execute relatively slow, but the result is guaranteed to be trustworthy (as consensus must be attained)
+    -> Alternatively, query calls executive fairly quickly, but the result may be untrustworthy or inaccurate
+-> Persistence characterizes the ability of being able to preserve the state of canister(s) across multiple cycles/updates
+    -> The ICP blockchain preserves the state of Motoko Actors (i.e. canister smart contracts), and their in-memory data structures indefinitely
+        -> This feature is known as orthogonal persistence (persistence implemented as an intrinsic property of an execution environment)
+        -> Orthogonal persistence provides the illusion that the program runs indefinitely without losing state
+        -> Orthogonal persistence can be achieved by prepending the 'stable' keyword before a variable declaration
+
+The ICP Network Nervous System:
+-> ICP token holders can stake their ICP within neurons in the Network Nervous System (NNS)
+    -> This action allows token holders to actively engage in the network's governance (help shape the future of the network by voting on proposals)
+    -> It also allows token holders to gain rewards for their participation (financial incentive)
+-> ICP tokens can be burnt at any time in exchange for computational cycles in canisters
+    -> Cycles can be thought of, at a high level, as stored computational power (similar to how batteries work)
+
+Additional Notes regarding Motoko:
+-> Defining a complex type:
+public type myType = {
+    title: Text;
+    content: Text;
+    age: Nat;
+    currTemp: Float;
+};
+-> Working with list structures:
+var myList: List.List<Type> = List.nil<Type>(); // Creating a new list object
+myList := List.push(newItem, myList);           // Pre-pending a new item to the specified list
+myList := List.append(List.take(myList, n), List.drop(myList, n + 1)) // Remove element at index n from the list
+
+-> Interacting with public Motoko functions from the React frontend:
+    -> Import the module from the "declarations" folder in the project directory
+        -> Use dot notation with this module to access and interact with backend functions in .mo files
+        -> The signatures of all public Motoko methods are specified in the corresponding .did (candid) files

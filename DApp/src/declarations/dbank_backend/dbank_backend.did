@@ -1,0 +1,6 @@
+service : {
+  compound: () -> () oneway;
+  deposit: (float64) -> () oneway;
+  getBalance: () -> (float64) query;
+  withdraw: (float64) -> () oneway;
+}
