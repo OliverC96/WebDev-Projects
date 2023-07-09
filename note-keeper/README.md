@@ -5,6 +5,7 @@
   <li> Supports both local and third-party (Twitter, Facebook OAuth 2.0) authentication methods via passport.js (*see TODO.txt) </li>
   <li> User account credentials, and application data (their note collection) stored persistently in MongoDB cluster </li>
   <li> Frontend powered by React.js; backend powered by Node.js and express.js
+  <li> Skeleton UI template credit: Dr. Angela Yu, Udemy Web Development Bootcamp </li>
 </ul>
 
 ![Login Page](login_page.png)
