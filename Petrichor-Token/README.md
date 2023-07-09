@@ -5,4 +5,5 @@
   <li> Users are authenticated via Internet Identity (which takes advantage of built-in biometric authentication methods) </li>
   <li> User balances are stored securely, and indefinitely, across multiple canister update cycles </li>
   <li> Frontend dashboard (./src/token_assets) powered by React.js; backend smart contract (./src/token) implemented in Motoko </li>
+  <li> Skeleton UI template credit: Dr. Angela Yu, Udemy Web Development Bootcamp </li>
 </ul>
