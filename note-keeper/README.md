@@ -6,3 +6,8 @@
   <li> User account credentials, and application data (their note collection) stored persistently in MongoDB cluster </li>
   <li> Frontend powered by React.js; backend powered by Node.js and express.js
 </ul>
+
+![Login Page](login_page.png)
+![Register Page](register_page.png)
+![Home Page](home_page.png)
+![Edit Note](edit_note.png)
