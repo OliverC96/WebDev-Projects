@@ -1,0 +1,18 @@
+-> 'Coins' are currencies created with their own (proprietary) blockchain technology
+-> Alternatively, 'tokens' are currencies that leverage existing blockchain technologies
+
+-> The ICP utilizes a custom 'Principal' type that can be used to uniquely identify specific users and canisters
+    -> Use the 'dfx identity get-principal' command to access your principal ID
+-> The HashMap data type in Motoko can be used to effectively map keys to values
+-> The 'shared' keyword provides external actor's with access to public methods within another actor
+-> Pre- and post-upgrade system calls can be defined to persist non-stable data types across multiple sessions/cycles
+    -> For example, hash maps are non-stable, and so these functions can be utilized to maintain their data's integrity
+
+-> Internet Identity is an anonymizing, privacy-enhancing authentication framework that can be readily integrated with Web3 applications
+    -> Adding a device to an anchor generates a new internet identity
+        -> This action, in turn, initiates the generation of a pair of cryptographic keys (one public, one private)
+        -> The public key is stored openly on the Internet Computer blockchain, while the private key remains hidden, and associated with the device's anchor profile
+        -> Multiple devices can be added to the same anchor
+    -> The authentication process requires both of these keys in order to authenticate a user (i.e. enter a new application session)
+    -> Internet Identity also allows users to sign/verify traditional blockchain transactions
+-> Internet identity is fast, secure, and convenient (doesn't require usernames or passwords)

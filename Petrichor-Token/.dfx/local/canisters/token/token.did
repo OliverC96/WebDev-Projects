@@ -1,0 +1,6 @@
+service : {
+  checkBalance: (principal) -> (nat) query;
+  getSymbol: () -> (text) query;
+  releaseTokens: () -> (text);
+  transferTokens: (principal, nat) -> (text);
+}

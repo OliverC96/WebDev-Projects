@@ -21,7 +21,7 @@ document.querySelector("form").addEventListener("submit", async (event) => {
     const depositLabel = document.getElementById("input-amount");
     const withdrawLabel = document.getElementById("withdrawal-amount");
 
-    submitButton.setAttribute("disabled", true);
+    submitButton.setAttribute("disabled", "true");
 
     // If the deposit field is not empty, deposit its value into the user's current balance
     if (depositLabel.value.length !== 0) {
