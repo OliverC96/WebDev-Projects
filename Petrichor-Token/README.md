@@ -7,3 +7,5 @@
   <li> Frontend dashboard (./src/token_assets) powered by React.js; backend smart contract (./src/token) implemented in Motoko </li>
   <li> Skeleton UI template credit: Dr. Angela Yu, Udemy Web Development Bootcamp </li>
 </ul>
+
+![Main Page](petrichor.png)
