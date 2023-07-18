@@ -1,0 +1,68 @@
+Introduction to NFTs:
+-> Non-fungible tokens (NFTs) are unique, cryptographic tokens that exist on a blockchain, and cannot be replicated
+    -> NFTs are tokenized assets which are assigned unique identification codes
+
+Motoko Actor classes and other modules:
+-> Actor classes are a construct in Motoko that enable the 'programmatic creation' of a network of actors (i.e. canisters)
+    -> Instantiations are formed by passing in a valid set of arguments via the command-line (dfx deploy --argument)
+    -> Each instance may have a unique set of data, but they all have access to the same query and update methods
+    -> The "this" keyword can be appended to an actor class definition to access the canister (principal) ID of newly created actor instances (using Principal.fromActor method)
+    -> Actor classes can be thought of (at a high-level) as factories with the ability to programmatically generate actors
+-> The 'ExperimentalCycles' Motoko module can be used to simulate/track the usage of cycles over a series of transactions (method calls)
+    -> This module is useful for developers in that it provides accurate insight into the range of computational resources needed for users to interact with the DApp
+
+Third-party React useForm Hook:
+-> The useForm hook (from react-hook-form) can be used as an alternative to the native useState hook when keeping track of form data
+    -> Usage: const { register, handleSubmit } = useForm();
+        -> The register method can be called to register input fields with the hook
+            -> e.g. {...register(field_name, {required: true})}
+        -> The handleSubmit method validates form data before initiating form submission
+            -> e.g. {handleSubmit(onSubmit)}
+
+Built-in React useCallback and useMemo Hooks:
+-> The useCallback and useMemo hooks are used to implement memoization (a popular optimization technique)
+    -> useCallback works with functions, while useMemo works with arrays and other objects
+    -> These hooks preserve previously created references, enabling them to bypass repetitive expensive computations
+        -> Doing so saves memory, improves performance, and reduces the number of unnecessary re-renders
+    -> At a high-level, these hooks are a type of cache, and the dependencies are the corresponding cache invalidation strategy (updating stale cache data)
+    -> For every re-render, React has two choices:
+        -> Invoke the function again (create a new reference), or
+        -> Re-use previously computed data (if the inputs remain unchanged)
+
+Integrating the Motoko backend with React frontend:
+-> Import the necessary Motoko modules from the "declarations" directory (containing all backend method signatures)
+-> Access fields/attributes via (asynchronous) public query methods
+-> Use React hooks (useState, useEffect) to display this data, or implement conditional rendering
+
+TypeScript with React (.tsx):
+-> TypeScript is an open-source programming language developed and maintained by Microsoft
+    -> It can be viewed as a strict 'superset' of JavaScript that offers the following complementary features:
+        -> Static typing (vanilla JS is dynamically/loosely typed in comparison)
+        -> Class-based, object-oriented constructs
+-> TypeScript allows for the creation of custom, complex types in the form of interfaces
+-> Examples of explicit type declarations (annotations):
+    -> const myName: string = "Oliver";
+    -> const myAge: number = 22;
+    -> interface customType {
+        field1:  number;
+        field2:  string | number;                            // Union ('|') to allow for multiple different types
+        field3?: boolean;                                    // Conditional field (appending '?')
+        field4:  (number | string)[];                        // Typing a (dynamically-sized) array
+        field5:  [string, number, boolean];                  // Typing a (fixed-size) tuple
+        myFunc:  (param1: string, param2: boolean) => string // Typing a function (parameters + return vals)
+        field6:  "option 1" | "option 2"                     // Defining specific values (rather than general types)
+    }
+-> TypeScript is converted (i.e. transpiled) into equivalent JavaScript code at runtime
+
+Next.js React Framework:
+-> A lightweight, open-source framework built upon React.js used to construct efficient, server-rendered web applications
+-> Key features:
+    -> Code splitting (each page only loads the necessary JavaScript, reducing render times)
+    -> File system routing (conveniently create routes by adding files to the /pages directory)
+        -> Create nested routes by adding directories to the root /pages directory
+    -> Server-side rendering (client receives non-interactive copy of HTML document, server executes JavaScript code, returns finalized version to client)
+        -> Consequence: there may be a minor delay as the browser awaits a response from the server
+        -> Alternate: client-side rendering (client CPU processes/executes all JavaScript code)
+            -> May potentially be problematic in certain scenarios (outdated computers in combination with modern, memory-intensive sites)
+    -> Static site generation (all web pages/routes are pre-rendered, cached, and served over a CDN)
+        -> Side effect: can improve Search Engine Optimization (SEO) due to the improved render speeds

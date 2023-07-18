@@ -57411,27 +57411,38 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _declarations_token__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../declarations/token */ "./src/declarations/token/index.js");
 /* harmony import */ var _dfinity_principal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @dfinity/principal */ "./node_modules/@dfinity/principal/lib/esm/index.js");
+/* harmony import */ var _dfinity_auth_client__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @dfinity/auth-client */ "./node_modules/@dfinity/auth-client/lib/esm/index.js");
 
 
 
+
+// Functional component to encapsulate the balance section
 function Balance(props) {
+    // Defining hooks to keep track of various states
     const [principalID, setPrincipalID] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("");
     const [walletBalance, setWalletBalance] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("");
     const [tokenSymbol, setTokenSymbol] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("");
     const [isVisible, setVisible] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+    // Initiating a query request to check the current balance associated with the given principal address
     async function handleClick() {
         const principal = _dfinity_principal__WEBPACK_IMPORTED_MODULE_2__.Principal.fromText(principalID);
-        const balance = await _declarations_token__WEBPACK_IMPORTED_MODULE_1__.token.checkBalance(principal);
-        const symbol = await _declarations_token__WEBPACK_IMPORTED_MODULE_1__.token.getSymbol();
+        const authClient = await _dfinity_auth_client__WEBPACK_IMPORTED_MODULE_3__.AuthClient.create();
+        const userIdentity = authClient.getIdentity();
+        const authenticatedCanister = (0,_declarations_token__WEBPACK_IMPORTED_MODULE_1__.createActor)(_declarations_token__WEBPACK_IMPORTED_MODULE_1__.canisterId, {
+            agentOptions: {
+                identity: userIdentity
+            }
+        });
+        // Retrieving the balance and token symbol from the Motoko smart contract
+        const balance = await authenticatedCanister.checkBalance(principal);
+        const symbol = await authenticatedCanister.getSymbol();
+        // Updating the frontend to reflect the authenticated canister's balance
         setWalletBalance(balance.toLocaleString());
         setTokenSymbol(symbol);
         setVisible(true);
     }
     return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: "window white" },
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", null, "Check account token balance:"),
-        react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null,
-            "Note: Your principal ID is: ",
-            props.principal),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null,
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", { id: "balance-principal-id", name: "principal", type: "text", placeholder: "Enter a Principal ID", value: principalID, onChange: (e) => setPrincipalID(e.target.value) })),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", { className: "trade-buttons" },
@@ -57467,9 +57478,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+// Functional component to encapsulate the faucet (free token collection) section
 function Faucet() {
+    // Defining hooks to keep track of various states
     const [status, setStatus] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("Claim");
     const [isDisabled, setDisabled] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+    // Initiating a request to the backend to claim free tokens
     async function handleClick(event) {
         const authClient = await _dfinity_auth_client__WEBPACK_IMPORTED_MODULE_2__.AuthClient.create();
         const userIdentity = await authClient.getIdentity();
@@ -57478,6 +57492,7 @@ function Faucet() {
                 identity: userIdentity
             }
         });
+        // Processing the request, and displaying the result/status on the frontend
         const claimResult = await authenticatedCanister.releaseTokens();
         setStatus(claimResult);
         setDisabled(true);
@@ -57534,17 +57549,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _declarations_token__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../declarations/token */ "./src/declarations/token/index.js");
 /* harmony import */ var _dfinity_principal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @dfinity/principal */ "./node_modules/@dfinity/principal/lib/esm/index.js");
+/* harmony import */ var _dfinity_auth_client__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @dfinity/auth-client */ "./node_modules/@dfinity/auth-client/lib/esm/index.js");
 
 
 
+
+// Functional component to encapsulate the application's transfer functionality
 function Transfer() {
+    // Defining a hook to store the transfer request's details/metadata
     const [input, setInput] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
         destination: "",
         amount: 0
     });
+    // Defining hooks to keep track of other various states
     const [isDisabled, setDisabled] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
     const [isHidden, setHidden] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true);
     const [status, setStatus] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("Transfer");
+    // Updates the transfer request's data based on the input elements in the fieldset
     function handleChange(event) {
         const { name, value } = event.target;
         setInput((prev) => {
@@ -57554,10 +57575,19 @@ function Transfer() {
             };
         });
     }
+    // Initiates the transfer request to the Motoko backend
     async function handleClick() {
         setHidden(true);
         setDisabled(true);
-        const transferResult = await _declarations_token__WEBPACK_IMPORTED_MODULE_1__.token.transferTokens(_dfinity_principal__WEBPACK_IMPORTED_MODULE_2__.Principal.fromText(input.destination), Number(input.amount));
+        const authClient = await _dfinity_auth_client__WEBPACK_IMPORTED_MODULE_3__.AuthClient.create();
+        const userIdentity = await authClient.getIdentity();
+        const authenticatedCanister = (0,_declarations_token__WEBPACK_IMPORTED_MODULE_1__.createActor)(_declarations_token__WEBPACK_IMPORTED_MODULE_1__.canisterId, {
+            agentOptions: {
+                identity: userIdentity
+            }
+        });
+        // Processes the transfer request, and displays the result/status on the frontend
+        const transferResult = await authenticatedCanister.transferTokens(_dfinity_principal__WEBPACK_IMPORTED_MODULE_2__.Principal.fromText(input.destination), Number(input.amount));
         setStatus(transferResult);
         setDisabled(false);
         setHidden(false);
@@ -60009,7 +60039,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 // CANISTER_ID is replaced by webpack based on node environment
-const canisterId = "rrkah-fqaaa-aaaaa-aaaaq-cai";
+const canisterId = "qhbym-qaaaa-aaaaa-aaafq-cai";
 
 /**
  * 
@@ -60225,6 +60255,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+// Highest-level initialization function
 const init = async () => {
     // Creating an auth client to authenticate the user via Internet Identity
     const authClient = await _dfinity_auth_client__WEBPACK_IMPORTED_MODULE_3__.AuthClient.create();
@@ -60236,7 +60267,7 @@ const init = async () => {
     else {
         await authClient.login({
             identityProvider: "https://identity.ic0.app/#authorize",
-            onSuccess: () => handleAuthenticated(authClient)
+            onSuccess: () => handleAuthenticated(authClient) // Success redirect
         });
     }
     // Main function to render the React components on the window

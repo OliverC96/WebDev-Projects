@@ -1,0 +1,14 @@
+service : {
+  checkBalance: (principal) -> (nat) query;
+  createListing: (principal, nat) -> (text);
+  getActiveListings: () -> (vec principal) query;
+  getCollection: (principal) -> (vec principal) query;
+  getLastSale: (principal) -> (vec int) query;
+  getListingPrice: (principal) -> (nat) query;
+  getMarketplaceCanisterID: () -> (principal) query;
+  getSymbol: () -> (text) query;
+  isListed: (principal) -> (bool) query;
+  mintNFT: (vec nat8, text) -> (principal);
+  purchaseNFT: (principal, principal) -> (text);
+  transferTokens: (principal, nat) -> (text);
+}
