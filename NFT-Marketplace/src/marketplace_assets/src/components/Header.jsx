@@ -11,7 +11,7 @@ import CURRENT_USER_ID from "../index";
 function Header() {
 
     const USER_GALLERY_TITLE = "Your NFT Collection";
-    const DISCOVER_GALLERY_TITLE = "Discover Trending NFTs on the fastest-growing marketplace";
+    const DISCOVER_GALLERY_TITLE = "Discover Trending NFTs on the Fastest-Growing Marketplace";
 
     // Keeping track of the user's current NFT collection
     const [userGallery, setUserGallery] = useState();
