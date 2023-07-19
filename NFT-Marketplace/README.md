@@ -7,3 +7,11 @@
   <li> Skeleton UI template credit: <a href="https://www.udemy.com/share/1013gG3@zBviuF2z50UA_envJx9fJx_lMecsLiq4q6zXlQkeRgUkzn9aI8yDnrWVLByo8FYQsQ==/" target="_blank">Dr. Angela Yu, Udemy Web Development Bootcamp</a> </li>
   <li> <b>Bonus feature:</b> marketplace listings include helpful statistics such as time on market (listing age), and the relative price change compared with the most recent sale (to assist users in making informed decisions) </li>
 </ul>
+
+![Main Page Welcome Banner](welcome_banner.png)
+
+![User Private NFT Collection](collection.png)
+
+![Public NFT Marketplace Listings](marketplace.png)
+
+![NFT Minting Process](minter_form.png)
