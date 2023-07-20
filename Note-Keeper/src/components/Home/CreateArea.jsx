@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { DarkModeContext } from "../DarkModeContext.jsx";
 import { MdAdd } from "react-icons/md";
 import { Zoom, Fab } from "@mui/material";
 
@@ -6,6 +7,9 @@ import { Zoom, Fab } from "@mui/material";
 export function CreateArea(props) {
 
     const [isExpanded, setExpanded] = useState(false);
+
+    // Accessing the current state of the dark mode context
+    const { darkMode } = useContext(DarkModeContext);
 
     // Utilizing a useState hook to keep track of the current input in the form
     const [note, setNote] = useState({
@@ -41,10 +45,12 @@ export function CreateArea(props) {
 
     return (
         <div>
-            <form className="create-note">
+            <form className={darkMode ? "create-note create-dark" : "create-note create-light"}>
                 {/* Display the title field only when the user is active in the input area */}
                 {isExpanded && (
                     <input
+                        className={darkMode ? "dark-input" : "light-input"}
+                        style={{fontWeight: "500"}}
                         onChange={updateNote}
                         name="title"
                         placeholder="Title"
@@ -55,6 +61,7 @@ export function CreateArea(props) {
                 {/* Triple the number of rows in the text area in the expanded form */}
                 <textarea
                     onClick={expandArea}
+                    className={darkMode ? "dark-input" : "light-input"}
                     onChange={updateNote}
                     name="content"
                     placeholder="Take a note..."
@@ -64,7 +71,10 @@ export function CreateArea(props) {
                 />
                 {/* Implementing a floating action button with a smooth zoom effect */}
                 <Zoom in={isExpanded}>
-                    <Fab onClick={submitNote}>
+                    <Fab
+                        onClick={submitNote}
+                        style={{backgroundColor: darkMode && "#9b5de5"}}
+                    >
                         <MdAdd style={{fontSize: "1.5rem"}}/>
                     </Fab>
                 </Zoom>

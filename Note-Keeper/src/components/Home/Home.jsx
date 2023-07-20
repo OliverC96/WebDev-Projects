@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { DarkModeContext } from "../DarkModeContext.jsx";
 import { CreateArea } from "./CreateArea";
 import { Note } from "./Note";
 import axios from "axios";
@@ -8,6 +9,9 @@ export function Home() {
 
     // Utilizing a useState hook to keep track of the note collection
     const [notes, setNotes] = useState([]);
+
+    // Accessing the current state of the dark mode context
+    const { darkMode } = useContext(DarkModeContext);
 
     // Fetches the user's pre-existing notes from the database once, upon initial registration of the Home component
     useEffect(() => {
@@ -61,6 +65,15 @@ export function Home() {
         else {
             alert("Note content cannot be empty!");
         }
+    }
+
+    if (darkMode) {
+        document.body.classList.remove("light-mode");
+        document.body.classList.add("dark-mode");
+    }
+    else {
+        document.body.classList.remove("dark-mode");
+        document.body.classList.add("light-mode");
     }
 
     return (

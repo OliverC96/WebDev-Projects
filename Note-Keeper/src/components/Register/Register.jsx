@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { DarkModeContext } from "../DarkModeContext.jsx";
 import {
     MDBContainer,
     MDBCol,
@@ -13,6 +14,9 @@ import axios from "axios";
 
 // A functional component which represents the application's register page
 export function Register() {
+
+    // Accessing the current state of the dark mode context
+    const { darkMode } = useContext(DarkModeContext);
 
     // Keeping track of the current values in the form fields
     const [input, setInput] = useState({
@@ -65,6 +69,15 @@ export function Register() {
         window.open("http://localhost:5000/auth/twitter", "_self");
     }
 
+    if (darkMode) {
+        document.body.classList.remove("light-mode");
+        document.body.classList.add("dark-mode");
+    }
+    else {
+        document.body.classList.remove("dark-mode");
+        document.body.classList.add("light-mode");
+    }
+
     return (
         <MDBContainer fluid className="p-3 my-3">
 
@@ -72,9 +85,10 @@ export function Register() {
 
                 <MDBCol col='1' md='4'>
 
-                    <h3 className="mb-4" style={{color: "#264653"}}> Register with Keeper </h3>
+                    <h3 className={darkMode ? "mb-4 light-text" : "mb-4 med-text"}> Register with Keeper </h3>
 
                     <MDBInput
+                        className={darkMode && "dark-input"}
                         wrapperClass='mb-3'
                         id='formControlLg'
                         type='email'
@@ -86,6 +100,7 @@ export function Register() {
                         onChange={handleChange}
                     />
                     <MDBInput
+                        className={darkMode && "dark-input"}
                         wrapperClass='mb-3'
                         id='formControlLg'
                         type='password'
@@ -97,6 +112,7 @@ export function Register() {
                         onChange={handleChange}
                     />
                     <MDBInput
+                        className={darkMode && "dark-input"}
                         wrapperClass={error ? 'mb-0' : 'mb-3'}
                         id='formControlLg'
                         type='password'
@@ -112,38 +128,45 @@ export function Register() {
 
                     <div className="mb-3 d-flex flex-row">
                         <MDBCheckbox required/>
-                        <p className="ms-2"> I agree to the Keeper <a className="link-dark" href="/terms">Terms and Conditions</a> </p>
+                        <p
+                            className="ms-2"
+                            style={{color: darkMode ? "white" : "#264653"}}
+                        >
+                            I agree to the Keeper <a className={darkMode ? "link-light" : "link-dark"} href="/terms">Terms and Conditions</a>
+                        </p>
                     </div>
 
                     <MDBBtn
-                        className="mb-3 w-100"
+                        className={darkMode ? "mb-3 w-100 local-btn-dark" : "mb-3 w-100 local-btn"}
                         size="md"
-                        style={{backgroundColor: '#2a9d8f', border: "2px #217B71 solid" }}
                         onClick={registerUser}
-                    >   Register
+                    >
+                        Register
                     </MDBBtn>
 
                     <div className="divider d-flex align-items-center my-4">
-                        <p className="text-center fw-bold mx-3 mb-0" style={{color: "#264653"}}>OR</p>
+                        <p
+                            className="text-center fw-bold mx-3 mb-0"
+                            style={{color: darkMode ? "white" : "#264653"}}
+                        >
+                            OR
+                        </p>
                     </div>
 
                     <MDBBtn
-                        className="mb-3 w-100"
+                        className="mb-3 w-100 facebook-btn"
                         size="md"
-                        style={{backgroundColor: '#3b5998', border: "2px #2E4576 solid"}}
                         onClick={facebookAuth}
                     >
-                        <MDBIcon fab icon="facebook-f" className="mx-2"/>
                         Continue with Facebook
                     </MDBBtn>
 
                     <MDBBtn
-                        className="mb-3 w-100"
+                        className="mb-3 w-100 twitter-btn"
                         size="md"
                         style={{backgroundColor: '#55acee', border: "2px #178CE6 solid"}}
                         onClick={twitterAuth}
                     >
-                        <MDBIcon fab icon="twitter" className="mx-2"/>
                         Continue with Twitter
                     </MDBBtn>
 

@@ -1,28 +1,32 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useContext } from "react";
+import { DarkModeContext } from "../DarkModeContext.jsx";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { MdHighlight, MdDarkMode, MdLightMode, MdLogout } from "react-icons/md";
+import { MdHighlight, MdDarkMode, MdLightMode } from "react-icons/md";
+import { HiLogout } from "react-icons/hi";
 
 // A functional component which represents a header object
 export function Header() {
 
     const navigate = useNavigate();
 
-    // Keeping track of the current UI theme/appearance
-    const [darkMode, setDarkMode] = useState(false);
+    // Accessing the dark mode context
+    const { darkMode, toggleDarkMode } = useContext(DarkModeContext);
 
     // Fetches the user's theme preferences upon initial registration of the Header component
     useEffect(() => {
         axios.get("http://localhost:5000/api/user/theme")
             .then((res) => {
-                setDarkMode(res.data);
+                if (darkMode !== res.data) {
+                    toggleDarkMode();
+                }
             })
             .catch((err) => console.log(err));
     }, []);
 
     // Toggles the theme, and updates the user's preferences accordingly for future reference
     function changeMode() {
-        setDarkMode(!darkMode); // Locally update theme
+        toggleDarkMode(); // Locally update theme
         axios.post("http://localhost:5000/api/user/theme")
             .catch((err) => console.log(err));
     }
@@ -38,16 +42,37 @@ export function Header() {
 
     return (
         <header>
-            <div className="d-flex flex-row justify-content-between align-items-center">
-                <h1><a style={{color: "white", textDecoration: "none"}} href="/"> <MdHighlight /> Keeper </a></h1>
+            <div className={darkMode ? "d-flex flex-row justify-content-between align-items-center header-dark" : "d-flex flex-row justify-content-between align-items-center header-light"}>
+                <h1>
+                    <a className={darkMode ? "light-text" : "white-text"} href="/">
+                        <MdHighlight /> Keeper
+                    </a>
+                </h1>
                 {darkMode
                     ?   <div>
-                            <MdLightMode id="theme-icon" size={38} style={{cursor: "pointer", color: "white", marginRight: "1.5em"}} onClick={changeMode} />
-                            <MdLogout size={35} style={{cursor: "pointer", color: "white"}}/>
+                            <MdLightMode
+                                id="theme-icon"
+                                className="theme-icon light-text"
+                                size={38}
+                                onClick={changeMode}
+                            />
+                            <HiLogout
+                                size={35}
+                                className="logout-icon light-text"
+                            />
                         </div>
                     :   <div>
-                            <MdDarkMode id="theme-icon" size={38} style={{cursor: "pointer", marginRight: "1.5em"}} onClick={changeMode} />
-                            <MdLogout size={35} style={{cursor: "pointer"}} onClick={logoutUser}/>
+                            <MdDarkMode
+                                id="theme-icon"
+                                className="theme-icon white-text"
+                                size={38}
+                                onClick={changeMode}
+                            />
+                            <HiLogout
+                                className="logout-icon white-text"
+                                size={35}
+                                onClick={logoutUser}
+                            />
                         </div>
                 }
             </div>

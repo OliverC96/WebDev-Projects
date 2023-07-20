@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { DarkModeContext } from "../DarkModeContext.jsx";
 import { MdDelete, MdEdit } from "react-icons/md";
 import { EditModal } from "./EditModal.jsx";
 
@@ -7,6 +8,9 @@ export function Note(props) {
 
     // Keeping track of the visibility of the modal window
     const [isVisible, setVisibility] = useState(false);
+
+    // Accessing the current state of the dark mode context
+    const { darkMode } = useContext(DarkModeContext);
 
     // Display the modal window
     function showModal() {
@@ -25,18 +29,18 @@ export function Note(props) {
     }
 
     return (
-        <div className="note">
-            <h1>
+        <div className={darkMode ? "note note-dark" : "note note-light"}>
+            <h1 className={darkMode ? "light-text" : "dark-text"}>
                 {props.title}
             </h1>
-            <p>
+            <p className={darkMode ? "light-text" : "dark-text"}>
                 {props.content}
             </p>
             <button onClick={removeNote}>
-                <MdDelete style={{fontSize: "1.25rem"}}/>
+                <MdDelete className={darkMode ? "purple-text" : "green-text"}/>
             </button>
             <button onClick={showModal}>
-                <MdEdit style={{fontSize: "1.25rem", marginRight: "0.3rem"}}/>
+                <MdEdit className={darkMode ? "purple-text" : "green-text"} style={{marginRight: "0.3rem"}}/>
             </button>
             {isVisible &&
                 <EditModal

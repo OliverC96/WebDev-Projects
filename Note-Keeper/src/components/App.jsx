@@ -6,12 +6,13 @@ import { Login } from "./Login/Login";
 import { Register } from "./Register/Register";
 import { Header } from "./Partials/Header.jsx";
 import { Footer } from "./Partials/Footer.jsx";
+import { DarkModeProvider } from "./DarkModeContext.jsx";
 
 // Constructing, and extracting the highest-level component/module
 export function App() {
 
     return (
-        <div>
+        <DarkModeProvider>
             <BrowserRouter>
                 <Header />
                 <Routes>
@@ -21,7 +22,7 @@ export function App() {
                 </Routes>
                 <Footer />
             </BrowserRouter>
-        </div>
+        </DarkModeProvider>
     );
 
 }

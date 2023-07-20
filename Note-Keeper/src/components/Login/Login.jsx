@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { DarkModeContext } from "../DarkModeContext.jsx";
 import { useNavigate } from "react-router-dom";
 import {
     MDBContainer,
@@ -15,6 +16,9 @@ import axios from "axios";
 export function Login(props) {
 
     const navigate = useNavigate();
+
+    // Accessing the current state of the dark mode context
+    const { darkMode } = useContext(DarkModeContext);
 
     // Keeping track of whether the current user is logged in (i.e. authenticated) with the application
     const [loggedIn, setLoggedIn] = useState(false);
@@ -66,6 +70,15 @@ export function Login(props) {
         window.open("http://localhost:5000/auth/twitter", "_self");
     }
 
+    if (darkMode) {
+        document.body.classList.remove("light-mode");
+        document.body.classList.add("dark-mode");
+    }
+    else {
+        document.body.classList.remove("dark-mode");
+        document.body.classList.add("light-mode");
+    }
+
     return (
         <MDBContainer fluid className="p-3 my-3">
 
@@ -73,10 +86,11 @@ export function Login(props) {
 
                 <MDBCol col='1' md='4'>
 
-                    <h2 className="mb-4" style={{color: "#264653"}}> Login to Keeper </h2>
+                    <h2 className={darkMode ? "mb-4 light-text" : "mb-4 med-text"}> Login to Keeper </h2>
 
                     <MDBInput
                         wrapperClass='mb-4'
+                        className={darkMode && "dark-input"}
                         id='formControlLg'
                         type='email'
                         name="username"
@@ -88,6 +102,7 @@ export function Login(props) {
                     />
                     <MDBInput
                         wrapperClass='mb-4'
+                        className={darkMode && "dark-input"}
                         id='formControlLg'
                         type='password'
                         name="password"
@@ -98,40 +113,45 @@ export function Login(props) {
                         required
                     />
                     <MDBBtn
-                        className="mb-3 w-100"
+                        className={darkMode ? "mb-3 w-100 local-btn-dark" : "mb-3 w-100 local-btn"}
                         size="lg"
-                        style={{backgroundColor: '#2a9d8f', border: "2px #217B71 solid" }}
                         onClick={localAuth}
                     >
                         Log in
                     </MDBBtn>
 
                     <div className="divider d-flex align-items-center my-4">
-                        <p className="text-center fw-bold mx-3 mb-0" style={{color: "#264653"}}>OR</p>
+                        <p
+                            className="text-center fw-bold mx-3 mb-0"
+                            style={{color: darkMode ? "white" : "#264653"}}
+                        >
+                            OR
+                        </p>
                     </div>
 
                     <MDBBtn
-                        className="mb-4 w-100"
+                        className="mb-4 w-100 facebook-btn"
                         size="lg"
-                        style={{backgroundColor: '#3b5998', border: "2px #2E4576 solid"}}
                         onClick={facebookAuth}
                     >
-                        <MDBIcon fab icon="facebook-f" className="mx-2"/>
                         Continue with Facebook
                     </MDBBtn>
 
                     <MDBBtn
-                        className="mb-4 w-100"
+                        className="mb-4 w-100 twitter-btn"
                         size="lg"
-                        style={{backgroundColor: '#55acee', border: "2px #178CE6 solid"}}
                         onClick={twitterAuth}
                     >
-                        <MDBIcon fab icon="twitter" className="mx-2"/>
                         Continue with Twitter
                     </MDBBtn>
 
                     <div className="w-100" size="lg">
-                        <p className='text-center mx-3'>Don't have an account? <a href="/register" className="link-dark">Register here</a></p>
+                        <p
+                            className='text-center mx-3'
+                            style={{color: darkMode ? "white" : "black"}}
+                        >
+                            Don't have an account? <a href="/register" className={darkMode ? "link-light" : "link-dark"}> Register here </a>
+                        </p>
                     </div>
 
                 </MDBCol>

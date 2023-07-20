@@ -1,5 +1,9 @@
 :root {
     --green: #2a9d8f;
+    --purple: #9b5de5;
+    --lightGrey: #CBD2D8;
+    --medGrey: #242B30;
+    --darkGrey: #161a1d;
 }
 
 * {
@@ -7,6 +11,12 @@
     margin: 0;
     box-sizing: border-box;
 }
+
+.dark-input::placeholder {
+    color: #B9C3CA !important;
+    opacity: 0.6 !important;
+}
+
 html {
     font-family: "Montserrat", sans-serif;
 }
@@ -15,17 +25,71 @@ body {
     padding: 0 16px;
 }
 
-header {
+.light-mode {
+    color: white;
+    background-color: white;
+}
+
+.dark-mode {
+    color: var(--lightGrey);
+    background-color: var(--darkGrey);
+}
+
+.white-text {
+    color: white;
+}
+
+.light-text {
+    color: var(--lightGrey);
+}
+
+.med-text {
+    color: var(--medGrey);
+}
+
+.dark-text {
+    color: var(--darkGrey);
+}
+
+.green-text {
+    color: var(--green);
+}
+
+.purple-text {
+    color: var(--purple);
+}
+
+.header-light {
     background-color: var(--green);
     margin: auto -16px;
     padding: 16px 32px;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
 }
 
+.header-dark {
+    background-color: var(--medGrey);
+    margin: auto -16px;
+    padding: 16px 32px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+}
+
+.theme-icon {
+    cursor: pointer;
+    margin-right: 1.5em;
+}
+
+.logout-icon {
+    cursor: pointer;
+}
+
 header h1 {
-    color: #fff;
     font-family: "McLaren", cursive;
     font-weight: 200;
+}
+
+header h1 a {
+    text-decoration: none;
+    color: inherit;
 }
 
 footer {
@@ -39,19 +103,29 @@ footer {
 footer p {
     color: #ccc;
 }
+
 .note {
-    background: #fff;
     border-radius: 7px;
-    box-shadow: 0 2px 5px #ccc;
     padding: 10px;
     width: 240px;
     margin: 16px;
     float: left;
 }
+
+.note-light {
+    box-shadow: 0 2px 5px #ccc;
+    background-color: inherit;
+}
+
+.note-dark {
+    background-color: var(--medGrey);
+}
+
 .note h1 {
     font-size: 1.1em;
     margin-bottom: 6px;
 }
+
 .note p {
     font-size: 1.1em;
     margin-bottom: 10px;
@@ -62,26 +136,66 @@ footer p {
 .note button {
     position: relative;
     float: right;
-    color: var(--green);
     border: none;
     cursor: pointer;
     outline: none;
     background-color: transparent;
+    font-size: 1.25rem;
 }
 
 .note button:hover {
     opacity: 0.7;
 }
 
+.create-light {
+    background: #fff;
+    box-shadow: 0 1px 5px rgb(138, 137, 137);
+}
+
+.create-dark {
+    background: var(--medGrey);
+}
+
 form.create-note {
     position: relative;
     width: 480px;
     margin: 30px auto 20px auto;
-    background: #fff;
     padding: 15px;
     border-radius: 7px;
-    box-shadow: 0 1px 5px rgb(138, 137, 137);
 }
+
+.dark-input {
+    background-color: var(--medGrey) !important;
+    color: var(--lightGrey) !important;
+    outline: none !important;
+    border: none !important;
+}
+
+.light-input {
+    background-color: #fff;
+    color: var(--darkGrey);
+}
+
+.twitter-btn {
+    background-color: #55acee !important;
+    border: 2px #178CE6 solid !important;
+}
+
+.facebook-btn {
+    background-color: #3b5998 !important;
+    border: 2px #2E4576 solid !important;
+}
+
+.local-btn {
+    background-color: #2a9d8f !important;
+    border: 2px #217B71 solid !important;
+}
+
+.local-btn-dark {
+    background-color: #9b5de5 !important;
+    border: 2px #8135DE solid !important;
+}
+
 form.create-note input,
 form.create-note textarea {
     width: 100%;
