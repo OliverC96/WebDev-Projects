@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { DarkModeContext } from "../DarkModeContext.jsx";
 
 // Defining a custom style for the text area element
 const textAreaStyle = {
@@ -7,7 +8,9 @@ const textAreaStyle = {
     outline: "none",
     marginTop: "2%",
     resize: "none",
-    fontSize: "1.2em"
+    fontSize: "1.2em",
+    backgroundColor: "inherit",
+    color: "inherit"
 }
 
 // A functional component which encapsulates the form used to edit pre-existing notes
@@ -15,6 +18,9 @@ export function EditForm(props) {
 
     // Keeping track of the updated content
     const [content, setContent] = useState(props.content);
+
+    // Accessing the current state of the dark mode context
+    const { darkMode } = useContext(DarkModeContext);
 
     function handleChange(event) {
         setContent(event.target.value);
@@ -41,10 +47,11 @@ export function EditForm(props) {
                 required
             />
             <button
+                id="save-btn"
                 onClick={saveNote}
-                className="btn btn-primary"
-                style={{backgroundColor: "#e76f51", border: "2px #E24E29 solid"}}
-            > Save Changes
+                className={darkMode ? "btn btn-primary edit-btn-dark" : "btn btn-primary edit-btn"}
+            >
+                Save Changes
             </button>
         </form>
     );

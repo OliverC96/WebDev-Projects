@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import { DarkModeContext } from "../DarkModeContext.jsx";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import {
     MDBContainer,
     MDBCol,
     MDBRow,
     MDBBtn,
-    MDBIcon,
     MDBInput,
 }
 from 'mdb-react-ui-kit';
@@ -70,15 +69,6 @@ export function Login(props) {
         window.open("http://localhost:5000/auth/twitter", "_self");
     }
 
-    if (darkMode) {
-        document.body.classList.remove("light-mode");
-        document.body.classList.add("dark-mode");
-    }
-    else {
-        document.body.classList.remove("dark-mode");
-        document.body.classList.add("light-mode");
-    }
-
     return (
         <MDBContainer fluid className="p-3 my-3">
 
@@ -115,9 +105,10 @@ export function Login(props) {
                     <MDBBtn
                         className={darkMode ? "mb-3 w-100 local-btn-dark" : "mb-3 w-100 local-btn"}
                         size="lg"
-                        onClick={localAuth}
                     >
-                        Log in
+                        <Link to="/home" style={{color: "white", textDecoration: "none"}}>
+                            Log in
+                        </Link>
                     </MDBBtn>
 
                     <div className="divider d-flex align-items-center my-4">
@@ -150,7 +141,7 @@ export function Login(props) {
                             className='text-center mx-3'
                             style={{color: darkMode ? "white" : "black"}}
                         >
-                            Don't have an account? <a href="/register" className={darkMode ? "link-light" : "link-dark"}> Register here </a>
+                            Don't have an account? <Link to="/register" className={darkMode ? "link-light" : "link-dark"}> Register here </Link>
                         </p>
                     </div>
 

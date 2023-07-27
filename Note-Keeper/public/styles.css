@@ -1,5 +1,6 @@
 :root {
     --green: #2a9d8f;
+    --darkGreen: #264653;
     --purple: #9b5de5;
     --lightGrey: #CBD2D8;
     --medGrey: #242B30;
@@ -40,23 +41,27 @@ body {
 }
 
 .light-text {
-    color: var(--lightGrey);
+    color: var(--lightGrey) !important;
 }
 
 .med-text {
-    color: var(--medGrey);
+    color: var(--medGrey) !important;
 }
 
 .dark-text {
-    color: var(--darkGrey);
+    color: var(--darkGrey) !important;
 }
 
 .green-text {
-    color: var(--green);
+    color: var(--green) !important;
+}
+
+.dark-green-text {
+    color: var(--darkGreen) !important;
 }
 
 .purple-text {
-    color: var(--purple);
+    color: var(--purple) !important;
 }
 
 .header-light {
@@ -80,6 +85,16 @@ body {
 
 .logout-icon {
     cursor: pointer;
+}
+
+.edit-btn {
+    background-color: #e76f51 !important;
+    border: 2px #E24E29 solid !important;
+}
+
+.edit-btn-dark {
+    background-color: #52b788 !important;
+    border: 2px #388661 solid !important;
 }
 
 header h1 {

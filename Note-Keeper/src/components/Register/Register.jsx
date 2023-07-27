@@ -5,12 +5,12 @@ import {
     MDBCol,
     MDBRow,
     MDBBtn,
-    MDBIcon,
     MDBInput,
     MDBCheckbox,
 }
 from 'mdb-react-ui-kit';
 import axios from "axios";
+import {Link} from "react-router-dom";
 
 // A functional component which represents the application's register page
 export function Register() {
@@ -67,15 +67,6 @@ export function Register() {
     // Initiate registration via Twitter OAuth 2.0
     function twitterAuth() {
         window.open("http://localhost:5000/auth/twitter", "_self");
-    }
-
-    if (darkMode) {
-        document.body.classList.remove("light-mode");
-        document.body.classList.add("dark-mode");
-    }
-    else {
-        document.body.classList.remove("dark-mode");
-        document.body.classList.add("light-mode");
     }
 
     return (
@@ -139,9 +130,10 @@ export function Register() {
                     <MDBBtn
                         className={darkMode ? "mb-3 w-100 local-btn-dark" : "mb-3 w-100 local-btn"}
                         size="md"
-                        onClick={registerUser}
                     >
-                        Register
+                        <Link to="/home" style={{color: "white", textDecoration: "none"}}>
+                            Register
+                        </Link>
                     </MDBBtn>
 
                     <div className="divider d-flex align-items-center my-4">
