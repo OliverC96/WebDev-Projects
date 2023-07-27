@@ -70,7 +70,7 @@ export function Login(props) {
     }
 
     return (
-        <MDBContainer fluid className="p-3 my-3">
+        <MDBContainer fluid className="py-3 mt-3">
 
             <MDBRow center>
 
