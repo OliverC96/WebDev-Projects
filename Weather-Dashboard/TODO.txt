@@ -1,0 +1,2 @@
+-> Refactor geocoding util functions
+-> Make location search bar functional
