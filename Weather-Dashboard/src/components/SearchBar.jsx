@@ -2,14 +2,17 @@ import React, { useState } from "react";
 import { BiSearchAlt } from "react-icons/bi";
 import { HiOutlineInformationCircle } from "react-icons/hi";
 
+// The location search bar component
 export default function SearchBar(props) {
 
+    // Keeps track of the current input in the location search bar
     const [input, setInput] = useState("");
-    const [submission, setSubmission] = useState("");
 
+    // Initiates a request to the backend to update the weather data for the new location upon input submission
     const handleSubmit = (event) => {
         if (event.key === "Enter") {
-            setSubmission(input);
+            props.changeLocation(input);
+            setInput("");
         }
     }
 
@@ -19,6 +22,7 @@ export default function SearchBar(props) {
             <input
                 className="text-black text-lg outline-none p-2 w-5/12 mr-7 placeholder-gray-400 bg-primary rounded-md selection:bg-green-light"
                 placeholder={props.placeholder}
+                value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleSubmit}
             />

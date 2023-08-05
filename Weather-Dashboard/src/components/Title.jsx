@@ -1,6 +1,7 @@
 import React from "react";
 import { MdOutlineSensors } from "react-icons/md";
 
+// The application name and icon
 export default function Title(props) {
 
     return (

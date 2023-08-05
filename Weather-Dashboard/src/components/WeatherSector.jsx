@@ -7,6 +7,7 @@ import {
 import { TbLocation } from "react-icons/tb";
 import { BiSolidUpArrow } from "react-icons/bi";
 
+// Functional component which represents a single weather sector (e.g. Temperature, Humidity, etc.)
 export default function WeatherSector(props) {
 
     return (

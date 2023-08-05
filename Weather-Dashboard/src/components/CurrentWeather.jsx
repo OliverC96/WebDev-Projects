@@ -1,9 +1,19 @@
 import React from "react";
 import WeatherSector from "./WeatherSector";
-import { LuWind, LuThermometerSun, LuSun, LuEye } from "react-icons/lu";
+import {
+    LuWind,
+    LuThermometerSun,
+    LuSun,
+    LuEye
+} from "react-icons/lu";
 import { FaCloudscale } from "react-icons/fa"
 import { BsDropletHalf } from "react-icons/bs";
-import { getUVSeverity, getVisibilitySeverity, convertToKmH, convertToKm } from "../utils/MeasurementUtils";
+import {
+    getUVSeverity,
+    getVisibilitySeverity,
+    convertToKmH,
+    convertToKm
+} from "../utils/MeasurementUtils";
 import { getExtrema } from "../utils/MeasurementUtils";
 
 // Functional component which encapsulates the current weather section
@@ -13,14 +23,14 @@ export default function CurrentWeather(props) {
         <div className="w-full rounded-md bg-main p-8">
             <div className="flex justify-between">
                 <h1 className="mb-6 text-xl"> Current Weather </h1>
-                <h1 className="mb-6 text-xl"> {props.location.name}, {props.location.country} </h1>
+                <h1 className="mb-6 text-xl"> {props.location.name}, {props.location.province} </h1>
             </div>
             <div className="grid grid-cols-3 gap-5 ">
                 {/* Temperature section */}
                 <WeatherSector
                     type="Temperature"
                     units="&deg;C"
-                    value={props.data.feels_like}
+                    value={props.data.temp}
                     icon={<LuSun className="w-8 h-8" />}
                     extrema={getExtrema("temp", props.hourlyData)}
                     status={props.data.weather[0].main}
@@ -45,8 +55,8 @@ export default function CurrentWeather(props) {
                 {/* UVI section */}
                 <WeatherSector
                     type="UV Index"
-                    units={getUVSeverity(props.data.uvi * 10)}
-                    value={props.data.uvi * 10}
+                    units={getUVSeverity(props.data.uvi)}
+                    value={props.data.uvi}
                     icon={<LuThermometerSun className="w-8 h-8" />}
                     extrema={getExtrema("uvi", props.hourlyData)}
                 />

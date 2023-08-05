@@ -5,27 +5,45 @@ const GEOCODING_ENDPOINT = process.env.REACT_APP_WEATHER_ENDPOINT + "/geo/1.0";
 const COUNTRY_CODE = process.env.REACT_APP_COUNTRY_CODE;
 const API_KEY = process.env.REACT_APP_API_KEY;
 
+// A mapping of Canadian province names to their corresponding (abbreviated) province codes
+const PROVINCE_CODES = {
+    "Alberta": "AB",
+    "British Columbia": "BC",
+    "Manitoba": "MB",
+    "Ontario": "ON",
+    "Quebec": "QC",
+    "Nova Scotia": "NS",
+    "New Brunswick": "NB",
+    "Prince Edward Island": "PE",
+    "Saskatchewan": "SK",
+    "Newfoundland and Labrador": "NL",
+    "Northwest Territories": "NW",
+    "Yukon": "YT",
+    "Nunavut": "NU"
+}
+
 // Helper function which determines the validity of the provided zip code
 // Note: only validates Canadian zip codes, based on the following criteria: https://tinyurl.com/yau3euwr
 const validateZipCode = (zipCode) => {
+    let res = true;
     zipCode = zipCode.replace(/\s+/g, "");      // Trim whitespace from the zip code
-    zipCode.forEach((val, index) => {
+    zipCode.split("").forEach((val, index) => {
         if (index % 2 === 0) {                  // Ensure that every even-indexed character is an uppercase letter
             if (val !== val.toUpperCase()) {
-                return false;
+                res = false;
             }
         }
         else {                                  // Ensure that every odd-indexed character is a digit
             if (val < '0' || val > '9') {
-                return false;
+                res = false;
             }
         }
     });
-    return true;
+    return res;
 }
 
 // Transforms a valid zip code or city name into an equivalent pair of geographical coordinates ('direct geocoding')
-const convertToCoordinates = (location) => {
+const convertToCoordinates = async (location) => {
 
     // Configuring the query parameters
     const isZip = validateZipCode(location);
@@ -39,25 +57,11 @@ const convertToCoordinates = (location) => {
         {
             q: location + "," + COUNTRY_CODE,
             appid: API_KEY,
-            limit: 10
+            limit: 3
         };
 
     // Initiating the direct geocoding request
-    axios.get(GEOCODING_ENDPOINT + isZip ? "/zip" : "/direct", {params})
-        .then((res) => {
-            console.log(res);
-            const data = isZip ? res : res[0];
-            return {
-                latitude: data.lat,
-                longitude: data.long,
-                name: data.name,
-                country: data.country
-            };
-        })
-        .catch((err) => {
-            console.log("Error - geocoding request failed:");
-            console.log(err);
-        });
+    return await axios.get(GEOCODING_ENDPOINT + (isZip ? "/zip" : "/direct"), {params});
 
 }
 
@@ -78,5 +82,6 @@ const convertToLocation = async (lat, long) => {
 
 export {
     convertToLocation,
-    convertToCoordinates
+    convertToCoordinates,
+    PROVINCE_CODES
 }
