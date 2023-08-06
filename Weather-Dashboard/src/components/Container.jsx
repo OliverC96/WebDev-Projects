@@ -5,6 +5,7 @@ import CurrentWeather from "./CurrentWeather";
 import { LoadingContext } from "./LoadingContext";
 import Forecast from "./Forecast";
 import Header from "./Header";
+import Footer from "./Footer";
 import "../index.css";
 
 // Primary component which interacts with the API service, and updates subcomponents accordingly
@@ -123,7 +124,7 @@ export default function Container(props) {
     }, [location.latitude, location.longitude]);
 
     return (
-        <div className="max-w p-16 flex flex-col bg-wrapper text-primary text-md font-medium">
+        <div className="max-w p-16 flex flex-col bg-wrapper text-primary text-md font-medium items-center">
             {/* Custom header component containing the title and location search bar */}
             <Header
                 changeLocation={handleLocationChange}
@@ -145,6 +146,10 @@ export default function Container(props) {
             <Forecast
                 data={weather.daily}
                 type="daily"
+            />
+            {/* Dynamic footer component containing copyright statement */}
+            <Footer
+                author="Oliver Clennan"
             />
         </div>
     );
