@@ -37,6 +37,6 @@ export default function WeatherCard(props) {
                     </div>
             }
         </div>
-    )
+    );
 
 }

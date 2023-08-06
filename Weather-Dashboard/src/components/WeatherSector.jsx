@@ -29,7 +29,7 @@ export default function WeatherSector(props) {
                 }
             </div>
             {/* Second row - the current recorded value (including appropriate units) */}
-            <div className="flex">
+            <div className="flex relative">
                 <h1 className="text-4xl"> {Math.round(props.value)} </h1>
                 <h1 className={`ml-2 text-lg ${props.type === "UV Index" && getUVColour(props.value)}`}> {props.units} </h1>
             </div>
@@ -49,6 +49,6 @@ export default function WeatherSector(props) {
                 </div>
             </div>
         </div>
-    )
+    );
 
 }

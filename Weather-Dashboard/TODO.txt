@@ -1,1 +1,0 @@
--> Implement shadcn "skeleton" component while API fetches weather data upon location change

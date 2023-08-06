@@ -57,8 +57,8 @@ const convertToKm = (metres) => {
     return metres / 1000;
 }
 
-// Retrieves the extrema (min and max vals) of the provided type (field) in the given set of hourly weather data
-const getExtrema = (type, data) => {
+// Retrieves the extrema (min and max vals) of the provided type (field) in the given set of hourly weather data (including the current hour's data)
+const getExtrema = (type, data, curr) => {
     const firstHour = data[0];
     let min = {
         val: firstHour[type],
@@ -84,6 +84,12 @@ const getExtrema = (type, data) => {
             }
         }
     });
+    if (curr < min.val) {
+        min.val = curr;
+    }
+    else if (curr > max.val) {
+        max.val = curr;
+    }
     if (type === "wind_speed") {
         min.val = convertToKmH(min.val);
         max.val = convertToKmH(max.val);
@@ -106,7 +112,7 @@ const getMeasurementRatio = (minVal, currVal, maxVal) => {
     if (length < 2) {           // If the variance between min and max is negligible, display the position arrow at halfway
         return 50;
     }
-    else if (ratio > 95) {      // Minor adjustment to improve styling when curr val is very close to the max val
+    else if (ratio > 95) {      // Minor adjustment to improve styling when curr val ~= max val
         return 95;
     }
     return ratio;               // Otherwise, return the un-adjusted ratio (position of current val within the range of [min, max])
