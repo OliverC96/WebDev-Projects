@@ -1,4 +1,4 @@
-<h3> Weather Dashboard </h3>
+<h3> Weather Dashboard <a href="https://64d2c239ff143319c5f540b5--vocal-squirrel-063650.netlify.app/"> [Live Demo] </a></h3>
 <ul>
   <li> A modern weather dashboard displaying the current weather conditions, as well as hourly and daily forecasts </li>
   <li> Upon initial loading of the application, users will be asked to share access to their current position so it can be set as the default location </li>
