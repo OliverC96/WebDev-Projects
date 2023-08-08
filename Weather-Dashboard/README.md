@@ -10,3 +10,6 @@
   <li> All weather data is provided by the OpenWeatherMap <a href="https://openweathermap.org/api/one-call-3"> One Call API 3.0 </a> service </li>
   <li> Frontend powered by React.js and styled with TailwindCSS </li>
 </ul>
+
+![Header, search bar, and current weather section](./current_weather.png)
+![Hourly and daily weather forecasts for the current location](./forecasts.png)
