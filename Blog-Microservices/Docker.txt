@@ -1,0 +1,78 @@
+Deployment of Microservices
+-> Docker can be used to efficiently manage and maintain deployed microservice applications
+    -> The application is partitioned into isolated computing environments called 'containers'
+        -> Generally one microservice per container; each container contains only the code necessary to run the microservice
+        -> Can dynamically change the number of containers as needed (load balancing) to satisfy computing demand
+    -> Running the application locally assumes that certain packages (node, npm) are installed in the user's environment
+        -> Docker eliminates the need for these assumption by encapsulated ALL required equipment inside containers
+            -> Abstracts away knowledge/awareness of build details/dependencies from the user
+    -> Executing Docker on the command line generates an image file
+        -> An 'image' contains all of the dependencies and configurations required to run a program
+        -> Image files are persistently stored on the hard drive, and can be used to create containers (i.e. image instances)
+            -> Images can be viewed as 'filesystem snapshots' - a copy of a number of files/directories relevant to the program
+    -> The Docker CLI is used to interact with the Docker Server (daemon), which can run image programs
+        -> The image cache is a local repository of image files (docker programs)
+    -> Docker is essentially a linux virtual machine, containing a linux kernel which restricts/limits access to hardware resources
+-> Kubernetes is a common software tool used to run and manage containerized applications
+    -> Developer can specify certain configurations to dictate the nature of inter-container interactions
+    -> Kubernetes clusters contain a set of virtual machines (also referred to as 'nodes')
+        -> They also contain a 'master' program which manages the nodes at a high level
+-> Docker and Kubernetes allow for quick and efficient scaling of microservice/containerized applications
+-> Namespacing is a technique used to isolate hardware or software resources per process
+    -> Allowing a process to only access a pre-defined/restricted subsection of resources (partitioning/segmenting hard drive on a per-process basis)
+-> Control groups (i.e. 'cgroups') are used to limit the amount (magnitude) of resources (bandwidth) that a given process can utilize
+
+Docker Commands
+-> Create and run a container from a particular image: docker run <image_name>
+    -> Specify an alternate startup command (overrides the default command): docker run <image_name> <unix_command>
+        -> Note: alternative commands/executables must exist within the image's filesystem snapshot (due to isolated nature of the container)
+    -> Note: docker run = docker create (create container) + docker start (execute image program via startup command)
+-> Listing/viewing currently running containers: docker ps
+    -> Append --all to the command to view a comprehensive history of all containers that have ever been run with docker
+-> Restart inactive/exited containers: docker start -a <container_id>
+-> Remove inactive/exited containers: docker system prune
+    -> Note: also clears build cache (images previously fetched from docker hub)
+-> Retrieve logs (all the information/output emitted from a container running an image program)
+    -> Use '-a' flag on docker start commands to set this option before running the image
+    -> Can also use docker logs <container_id> command to retrieve logs retroactively
+    -> Note: the generic docker run command retrieves/attaches logs by default
+    -> Useful for debugging purposes (inspecting internal state of containers)
+-> Gracefully stop a container: docker stop <container_id>
+    -> Sends a hardware signal (SIGTERM) to the running container, instructing the container to shutdown
+        -> Provides a small (10s) time window for the container to 'cleanup' before shutting down
+        -> If the program does not stop successfully after the time window has elapsed, docker sends a follow-up SIGKILL command
+-> Forcefully kill a container: docker kill <container_id>
+    -> Sends a hardware signal (SIGKILL) to the running container, instructing the container to terminate IMMEDIATELY
+-> Execute an additional command in a container (aside from the startup command): docker exec -it <container_id> <command>
+    -> Note: -it = -i (connect/attach terminal to STDIN channel of running process) and -t (formats input and output)
+-> Open shell/terminal/command prompt inside the context of the running container: docker exec -it <container_id> sh
+    -> Provides a unix-like environment (bash shell) to easily run multiple commands
+    -> Can also use docker run -it <image_name> sh to create an empty shell upon container startup
+-> Building a Dockerfile: docker build [-t <image_tag>] <build_context>
+    -> Conventional format of image tags: [docker_id] / [project_name] : [version]
+        -> e.g: oliverc96/test:latest
+-> Manually generate docker image files: docker commit -c <startup_command> <container_id>
+
+Dockerfiles and the Build Process:
+-> Creating a docker image file:
+    -> Create a plaintext 'Dockerfile' containing configurations specifying the container's content/filesystem, as well as a startup command
+    -> General configuration format: specify base image -> specify dependencies/installation commands -> specify startup command
+    -> Once the docker client (CLI) has received the dockerfile, it transfers it off to the docker server which uses the configuration to generate a fully-functional image file
+    -> Dockerfile's contain commands with the following general format: <instruction> <arguments>
+-> Behind-the-scene's of a Dockerfile build
+    -> Each command takes in the previous command's image (if it exists)
+    -> Then, it creates a temporary container out of this image, and proceeds to make some sort of change to it
+    -> Finally, a new snapshot is taken of the container's filesystem and startup command, and used to generate a resultant/output image file
+    -> Docker caches temporary/intermediate image files to speed up the (re-)build process whenever possible
+        -> Docker references cached images for every consecutive unchanged command in the Dockerfile
+        -> If the order of commands changes in the Dockerfile, it will not be able to utilize the image cache
+            -> Consequently, when making changes to a Dockerfile, it is advisable to insert new commands as far down as possible (for efficiency purposes)
+-> The 'alpine' version of an image is the most minimal/compact version of the image available
+    -> e.g. FROM node:alpine
+-> Copy relevant build files to the running container via: COPY <local_path> <container_path>
+    -> This command effectively copies the build files located at local_path (relative to the build context) to the specified container_path
+-> A port mapping must be explicitly specified (at run-time) to forward incoming requests from a local port into an appropriate container port
+    -> Running a Dockerfile with the port mapping option: docker run -p <local_port> : <container_port> <image_id>
+-> One can specify a working directory in a container with: WORKDIR <path>
+    -> All subsequent commands specified in the Dockerfile will be executed relative to this path (as opposed to the root)
+->

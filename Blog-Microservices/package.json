@@ -1,0 +1,11 @@
+{
+  "name": "Blog-Microservices",
+  "version": "1.0.0",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "react-icons": "^4.10.1"
+  },
+  "scripts": {
+    "start": "clear && npx kill-port 3003 && (nodemon ./event-bus/index.js & nodemon ./posts/index.js & nodemon ./comments/index.js & nodemon ./moderation/index.js & nodemon ./query/index.js)"
+  }
+}

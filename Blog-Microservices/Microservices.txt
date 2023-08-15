@@ -1,0 +1,32 @@
+Introduction to Microservices
+-> General flow of a monolithic server:
+    -> user request -> authentication middleware -> routing -> redirect to feature -> database interaction -> response
+-> A monolith contains the necessary code (routing, middleware, database logic) required to implement all features of an application
+-> Alternatively, a microservice only contains the code required to implement a single feature of the application (isolated code w/ a single focus)
+-> Microservices are standalone (entirely self-contained), and can still function perfectly fine if other services fail
+    -> Note: a microservice should never attempt to directly access the data related to another microservice
+-> A significant issue that arises is data management and transmission between/across microservices
+-> Microservice architecture, in general, encapsulates the principle of loose coupling
+
+Communication Strategies
+-> Synchronous communication: services communicate with each other via direct requests
+    -> Introduces a dependency between involved services; can lead to the creation of a convoluted network of requests
+-> Asynchronous communication: services communicate with each other indirectly, via events
+    -> An 'event bus' handles notifications/events emitted from involved microservices
+        -> Services can either emit events to, or receive events from, the event bus
+        -> The event bus manages/oversees inter-service communication, can send copies of events to other services when necessary, and receive results
+        -> Every time a new request is received, data is transmitted simultaneously to the related service's database, as well as to event bus/broker
+        -> Pros: zero dependencies on other services, cons: data duplication/redundancy, slightly convoluted structure
+
+Basic Microservice Implementation in Node/React
+-> Create a new express server for each resource/microservice
+    -> Note: all servers must have a unique port to ensure microservices are self-contained)
+-> Implement an event bus/broker structure in express.js (or use a pre-existing structure from RabbitMQ, Kafka, NATS, etc.)
+    -> At a high-level, an event bus is responsible for receiving incoming events/notifications, and publishing them to the appropriate listeners
+    -> Simple structure: for each incoming event sent to the /events POST route, transmit the event data to all relevant microservices
+        -> Microservices can effectively 'emit' an event by making a POST request to the event bus (with event type and data)
+-> A separate/specialized query service can be used to efficiently query for data related to any microservice
+    -> The query service receives information from the event bus, and stores the information in an appropriate data structure
+-> Handling missing events (in the case that one or more microservices is down for a period of time):
+    -> Modify the event broker to internally store a copy of each received event (either in-memory, or in a database)
+    -> When the service comes back online, it can quickly regain access to any missed events (i.e. event synchronization) by making a simple GET request to the event broker
