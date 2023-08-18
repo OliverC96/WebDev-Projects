@@ -26,7 +26,7 @@ server.route("/posts/:id/comments")
         };
         comments.push(newComment);
         commentsByPostID[req.params.id] = comments;
-        await axios.post(`http://localhost:${process.env.EVENT_BUS_PORT}/events`, {
+        await axios.post(`http://event-bus-srv:${process.env.EVENT_BUS_PORT}/events`, {
             type: "CommentCreated",
             data: {
                 ...newComment,
@@ -42,7 +42,7 @@ server.post("/delete/:id/comments", async (req, res) => {
     commentsByPostID[req.params.id] = comments.filter((comment) => {
         return comment.id !== commentID;
     });
-    await axios.post(`http://localhost:${process.env.EVENT_BUS_PORT}/events`, {
+    await axios.post(`http://event-bus-srv:${process.env.EVENT_BUS_PORT}/events`, {
         type: "CommentDeleted",
         data: {
             commentID: commentID,
@@ -61,7 +61,7 @@ server.post("/events", async (req, res) => {
             return comment.id === id;
         });
         comment.status = status;
-        await axios.post(`http://localhost:${process.env.EVENT_BUS_PORT}/events`, {
+        await axios.post(`http://event-bus-srv:${process.env.EVENT_BUS_PORT}/events`, {
             type: "CommentUpdated",
             data: {
                 ...comment,

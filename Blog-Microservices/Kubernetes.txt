@@ -1,0 +1,81 @@
+Introduction to Kubernetes
+-> 'kubectl' is the command-line interface used to interact with Kubernetes clusters
+-> Kubernetes is a common software tool used to run and manage containerized applications
+   -> Developer can specify certain configurations to dictate the nature of inter-container interactions
+   -> Kubernetes clusters contain the following structures/programs:
+       -> A set of virtual machines (commonly referred to as 'nodes')
+       -> A 'master' program which manages the nodes at a high level (interprets the input config file)
+       -> A 'deployment', which ensures the correct number of pods are currently running the image program
+            -> The deployment is responsible for automatically re-generating pods in the case of failure
+       -> A 'service', which allows for easy communication with all running containers in the cluster
+            -> Abstracts away communication details, forwards incoming (external) requests to the appropriate container
+-> Docker containers are hosted inside 'pods', and pods are distributed across available nodes
+    -> Distribution of pods is statistically-driven to maximize performance of the application
+
+Kubernetes Commands
+-> View the current version of Kubernetes server and client: kubectl version --short
+-> View all currently active/running pods: kubectl get pods
+-> Execute a command in a pod: kubectl exec <pod_name> -- <command>
+    -> Example (run sh shell inside pod): kubectl exec -it posts -- sh
+-> Retrieve logs/output emitted from a pod: kubectl logs <pod_name>
+-> Delete a pod: kubectl delete pod <pod_name>
+-> Instantiate new pod: kubectl apply -f <config_file>
+-> View detailed information of a particular pod object: kubectl describe pod <pod_name>
+-> View all currently active/running deployments: kubectl get deployments
+-> View detailed information regarding a deployment object: kubectl describe deployment <depl_name>
+-> Delete a deployment: kubectl delete deployment <depl_name>
+-> Instantiate new deployment: kubectl apply -f <config_file>
+
+Kubernetes Configuration Files
+-> The main purpose of configuration files is to instruct Kubernetes about the objects (pods, services, deployments) that are to be created in the cluster
+-> Configuration files are written in YAML format (similar to JSON)
+-> apiVersion: <version> specifies the set/pool of Kubernetes objects available for reference
+-> Deployment configuration files:
+    -> 'replicas' field indicates the number of copies of the pod to be run simultaneously (in parallel)
+    -> 'selector' field specifies how the desired pods are to be identified by Kubernetes (e.g. labels)
+    -> 'template' field specifies the individual pod's configuration
+
+Manually Update an Image used by a Deployment
+-> First, ensure the deployment is using the ":latest" version tag in the pod specification section of the deployment config file
+-> Next, make the required changes to the project code, and build a new image accordingly (docker build -t <tag_name> <build_context>)
+-> After the image has been successfully generated, push it to Docker Hub with: docker push <image_tag_name>
+-> Finally, run the command: kubectl rollout restart deployment <depl_name> to ensure the deployment references the latest image version
+
+Kubernetes Service Objects:
+-> Primary function is to enable communication/networking between the pods of a cluster, and expose pods to external requests
+-> Main types/variations of services:
+    -> Cluster IP: generates a URL to enable communication between pods of the same cluster
+        -> A Node Service is similar to a Cluster IP, but typically only used for development purposes
+    -> Load Balancer: exposes pods to the external network (allow them to handle incoming requests from the outside network)
+-> Service configuration files:
+    -> 'type' field refers to the type of service (Cluster IP, Load Balancer, Node Port) being configured
+    -> 'selector' field states the set of pods targeted by the service
+    -> 'port' and 'targetPort' fields:
+        -> External requests first enter the specified Node Service's port, and are then redirected to the targetPort associated with the appropriate pod/container
+        -> For convenience and clarity, port and targetPort are generally specified to be the same value
+-> In a Cluster IP service implementation, an image running within a pod can communicate with another pod inside the same cluster via the following command:
+    -> http://<service_name>:<port_number> (where the port_number is specified in the service configuration file)
+-> The primary goal of a Load Balancer service implementation is to provide external requests with a single point of entry to the entire Kubernetes cluster
+    -> A Load Balancer service configuration file contains the logic necessary to redirect incoming requests to the appropriate pod/container
+        -> Requests are forwarded/redirected to the Cluster IP service associated with the destination pod
+    -> A Load Balancer service instructs Kubernetes to retrieve a load balancer object (from the cloud provider), which narrows/converges traffic down to a single pod
+        -> An 'ingress' or 'ingress controller' is a type of pod which contains routing logic to distribute/direct traffic to other services inside the cluster
+            -> Note: all route paths used in the application must be unique, as an ingress controller cannot differentiate routes via method type (GET, POST, etc.)
+            -> Note: routes are generally defined in order of their importance/specificity
+                -> Wildcard routes should be placed at the end of the paths array in the configuration file (to avoid incorrect/premature matches)
+                    -> Wildcard routes using regular expressions (to match express route parameters) should have:
+                    -> A pathType of ImplementationSpecific
+                    -> The annotation nginx.ingress.kubernetes.io/use-regex: 'true' in the metadata config for the ingress object
+
+Automate Cluster Management with Skaffold API
+-> Skaffold is a command-line tool used to automate core tasks in a Kubernetes development environment (where frequent/active changes are made)
+    -> One of the benefits of Skaffold is that it significantly simplifies the process of updating code stored in a currently running pod
+-> Initialize Skaffold: 'skaffold dev'; terminate Skaffold: '^C'
+-> Skaffold configuration file:
+    -> The 'deploy.kubectl.manifests' field contains a reference to the application's Kubernetes configuration files
+        -> Upon startup, Skaffold will create Kubernetes objects out of the manifest files
+        -> Anytime changes are made to a file, Skaffold will automatically apply those changes to the appropriate object
+        -> Upon shutdown, Skaffold will delete/remove all objects associated with the manifest files (cleanup operation)
+    -> The 'build.artifacts.sync.manual.src' field includes references to the pod's source files
+        -> If any of these files are changed, Skaffold will attempt to manually/directly replace them in the pod
+        -> If files not stated in this field are changed, Skaffold will attempt to rebuild the entire pod from scratch

@@ -40,7 +40,7 @@ export default function PostCreate() {
                 title: "",
                 content: ""
             });
-            await axios.post("http://localhost:3002/posts", input);
+            await axios.post("http://posts.com/posts/create", input);
         }
         else {
             event.preventDefault();

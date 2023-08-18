@@ -14,7 +14,7 @@ export default function CommentCreate(props) {
     const handleSubmit = async (event) => {
         if (content !== "") {
             setContent("");
-            await axios.post(`http://localhost:3003/posts/${props.postID}/comments`, {content});
+            await axios.post(`http://posts.com/posts/${props.postID}/comments`, {content});
         }
         else {
             event.preventDefault();

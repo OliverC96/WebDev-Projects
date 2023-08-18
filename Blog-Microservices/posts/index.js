@@ -11,27 +11,23 @@ server.use(cors());
 
 let posts = {};
 
-server.route("/posts")
-    .get((req, res) => {
-        res.send(posts);
-    })
-    .post(async (req, res) => {
-        const postID = randomBytes(4).toString("hex");
-        const newPost = {
-            id: postID,
-            ...req.body
-        };
-        posts[postID] = newPost;
-        await axios.post(`http://localhost:${process.env.EVENT_BUS_PORT}/events`, {
-            type: "PostCreated",
-            data: newPost
-        });
-        res.status(201).send(posts[postID]);
+server.post("/posts/create", async (req, res) => {
+    const postID = randomBytes(4).toString("hex");
+    const newPost = {
+        id: postID,
+        ...req.body
+    };
+    posts[postID] = newPost;
+    await axios.post(`http://event-bus-srv:${process.env.EVENT_BUS_PORT}/events`, {
+        type: "PostCreated",
+        data: newPost
     });
+    res.status(201).send(posts[postID]);
+})
 
 server.post("/delete/:id", async (req, res) => {
     delete posts[req.params.id];
-    await axios.post(`http://localhost:${process.env.EVENT_BUS_PORT}/events`, {
+    await axios.post(`http://event-bus-srv:${process.env.EVENT_BUS_PORT}/events`, {
         type: "PostDeleted",
         data: {
             postID: req.params.id

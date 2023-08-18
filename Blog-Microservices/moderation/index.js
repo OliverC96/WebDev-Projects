@@ -16,7 +16,7 @@ server.post("/events", async (req, res) => {
                 commentStatus = "rejected";
             }
         });
-        await axios.post(`http://localhost:${process.env.EVENT_BUS_PORT}/events`, {
+        await axios.post(`http://event-bus-srv:${process.env.EVENT_BUS_PORT}/events`, {
             type: "CommentModerated",
             data: {
                 ...data,

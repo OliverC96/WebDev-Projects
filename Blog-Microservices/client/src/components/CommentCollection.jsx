@@ -11,7 +11,7 @@ export default function CommentCollection(props) {
 
     const deleteComment = async (commentID) => {
         window.location.reload(true);
-        await axios.post(`http://localhost:3003/delete/${props.postID}/comments`, {commentID});
+        await axios.post(`http://posts.com/delete/${props.postID}/comments`, {commentID});
     }
 
     return (

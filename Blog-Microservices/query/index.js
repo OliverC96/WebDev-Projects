@@ -70,7 +70,7 @@ server.post("/events", (req, res) => {
 
 server.listen(process.env.QUERY_SERVICE_PORT, async () => {
     console.log(`Query service launched on port ${process.env.QUERY_SERVICE_PORT}`);
-    axios.get(`http://localhost:${process.env.EVENT_BUS_PORT}/events`)
+    axios.get(`http://event-bus-srv:${process.env.EVENT_BUS_PORT}/events`)
         .then((res) => {
             res.data.forEach((event) => {
                 console.log(`Processing event: ${event.type}`);

@@ -10,14 +10,14 @@ export default function PostCollection() {
     const [postCollection, setPostCollection] = useState({})
 
     const fetchPosts = () => {
-        axios.get("http://localhost:3005/posts")
+        axios.get("http://posts.com/posts")
             .then((res) => setPostCollection(res.data))
             .catch((err) => console.log(`Client failed to fetch posts from query service: ${err}`))
     }
 
     const deletePost = async (postID) => {
         window.location.reload(true);
-        await axios.post(`http://localhost:3002/delete/${postID}`);
+        await axios.post(`http://posts.com/delete/${postID}`);
     }
 
     useEffect(() => {
