@@ -19,3 +19,16 @@
   <li> Frontend powered by React.js and styled with TailwindCSS; backend implemented in Node.js and Express.js </li>
   <li> This project was completed as part of the <a href="https://www.udemy.com/share/102VKE3@oJrOzUUFZM_w0sgLlxbBnv4sLJg79Jl53-nSVDBufA4RGbl5nsVkk5rbUwkmqAAoRw==/" target="_blank"> Microservices with Node JS and React </a> Udemy course </li>
 </ul>
+
+<h3> React Frontend </h3>
+
+![Application UI](./application.png)
+
+<h3> Kubernetes Deployment Environment </h3>
+
+![Kubernetes Deployment Environment](./deployment.png)
+
+<h3> Skaffold Logs </h3>
+
+![Skaffold Logs](./service_logs.png)
+
