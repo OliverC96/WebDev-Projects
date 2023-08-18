@@ -2,7 +2,7 @@
 <ul>
   <li> Allows authenticated users to view the secret passphrase </li>
   <li> 
-    A simple application intended to experiement with various encryption methods in Node.js: 
+    A simple application intended to experiment with various encryption methods in Node.js: 
     <ul>
       <li> Mongoose built-in database encryption </li>
       <li> SHA-256 and SHA-512 one-way cryptographic encryption </li>
